@@ -224,7 +224,19 @@
   .tl-item{
     display:grid;grid-template-columns:140px 1fr;gap:30px;
     padding:30px 0;border-bottom:1px solid var(--line);
+    position:relative;overflow:hidden;
   }
+  .tl-item.tl-fx{
+    opacity:0;
+    clip-path:inset(0 100% 0 0);
+    transition:opacity .5s ease, clip-path 1s cubic-bezier(.65,0,.15,1);
+  }
+  .tl-item.tl-fx.in{opacity:1;clip-path:inset(0 0% 0 0);}
+  .tl-item::before{
+    content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);
+    transition:width 1s cubic-bezier(.65,0,.15,1) .15s;
+  }
+  .tl-item.tl-fx.in::before{width:100%;}
   .tl-year{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold-light);}
   .tl-item h3{font-size:16px;font-weight:500;margin-bottom:6px;}
   .tl-item p{font-size:14px;opacity:.7;max-width:560px;}
@@ -232,11 +244,30 @@
   .why-item{
     display:grid;grid-template-columns:80px 1fr;gap:30px;
     padding:34px 0;border-top:1px solid var(--line);
+    position:relative;overflow:hidden;
   }
   .why-item:last-child{border-bottom:1px solid var(--line);}
   .why-num{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);opacity:.55;}
   .why-item h3{font-family:'Inter';font-weight:500;font-size:18px;margin-bottom:8px;}
   .why-item p{font-size:14px;opacity:.72;max-width:640px;}
+  .why-item.tl-fx{
+    opacity:0;clip-path:inset(0 100% 0 0);
+    transition:opacity .5s ease, clip-path 1s cubic-bezier(.65,0,.15,1);
+  }
+  .why-item.tl-fx.in{opacity:1;clip-path:inset(0 0% 0 0);}
+
+  #por-que-2{position:relative;overflow:hidden;}
+  #por-que-2::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background-image:linear-gradient(100deg, rgba(13,27,42,0.97) 34%, rgba(13,27,42,0.7) 100%), url("assets/why-bg.jpg");
+    background-size:cover;background-position:center;
+    background-attachment:fixed;
+    filter:saturate(0.85);
+  }
+  @media(max-width:900px){
+    #por-que-2::before{background-attachment:scroll;}
+  }
+  #por-que-2 .container{position:relative;z-index:1;}
 
   /* EQUIPO */
   .section-cream{
@@ -280,7 +311,7 @@
     position:absolute;left:0;right:0;bottom:0;padding:22px;z-index:2;
   }
   .team-photo-card .role{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:4px;}
-  .team-photo-card h3{font-size:22px;margin-bottom:10px;}
+  .team-photo-card h3{font-size:22px;margin-bottom:10px;color:var(--cream);}
   .team-photo-card .li-link{
     display:inline-flex;align-items:center;gap:6px;
     font-size:12px;color:var(--ink);opacity:.85;
@@ -289,6 +320,11 @@
   }
   .team-photo-card .li-link:hover{border-color:var(--gold);color:var(--gold-light);}
   .team-photo-card--center{grid-column:1/-1;width:calc(50% - 10px);margin:0 auto;}
+
+  @media(min-width:641px){
+    .team-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));max-width:1000px;}
+    .team-photo-card--center{grid-column:auto;width:auto;margin:0;}
+  }
   @media(max-width:560px){
     .team-photo-card .info{padding:14px;}
     .team-photo-card h3{font-size:16px;}
@@ -314,7 +350,6 @@
     .burger{display:block;}
     .grid-4{grid-template-columns:1fr 1fr;}
     .activos-grid{grid-template-columns:1fr;}
-    .team-grid{max-width:340px;}
     .contact-wrap{grid-template-columns:1fr;}
     .stats{grid-template-columns:1fr 1fr;}
     .stats div:nth-child(3){border-left:none;}
@@ -436,10 +471,10 @@
       <h2>Cómo llegamos <em>hasta aquí</em></h2>
     </div>
     <!-- EDITA: años y hitos reales de Ancor Investments -->
-    <div class="timeline reveal">
-      <div class="tl-item"><div class="tl-year">20XX</div><div><h3>Fundación</h3><p>Descripción breve del origen de Ancor Investments.</p></div></div>
-      <div class="tl-item"><div class="tl-year">20XX</div><div><h3>Hito relevante</h3><p>Descripción de un momento clave: primera operación destacada, expansión de equipo, etc.</p></div></div>
-      <div class="tl-item"><div class="tl-year">Hoy</div><div><h3>Ancor Investments</h3><p>Consolidados como referencia en operaciones off-market en Barcelona.</p></div></div>
+    <div class="timeline">
+      <div class="tl-item tl-fx" style="transition-delay:0s;"><div class="tl-year">20XX</div><div><h3>Fundación</h3><p>Descripción breve del origen de Ancor Investments.</p></div></div>
+      <div class="tl-item tl-fx" style="transition-delay:.15s;"><div class="tl-year">20XX</div><div><h3>Hito relevante</h3><p>Descripción de un momento clave: primera operación destacada, expansión de equipo, etc.</p></div></div>
+      <div class="tl-item tl-fx" style="transition-delay:.3s;"><div class="tl-year">Hoy</div><div><h3>Ancor Investments</h3><p>Consolidados como referencia en operaciones off-market en Barcelona.</p></div></div>
     </div>
   </div>
 </section>
@@ -450,11 +485,11 @@
       <span class="eyebrow">Por qué Ancor</span>
       <h2>Un socio <em>distinto</em> para un capital distinto.</h2>
     </div>
-    <div class="why-list reveal">
-      <div class="why-item"><div class="why-num">01</div><div><h3>Rigor en la selección</h3><p>Analizamos cientos de operaciones para seleccionar solo aquellas que superan nuestros criterios de rentabilidad, riesgo y liquidez. Menos del 5% de lo que vemos llega a nuestros inversores.</p></div></div>
-      <div class="why-item"><div class="why-num">02</div><div><h3>Acceso diferencial</h3><p>Nuestra red nos permite acceder a operaciones off-market habitualmente vetadas para el inversor particular. Llevamos ese acceso a nuestros clientes.</p></div></div>
-      <div class="why-item"><div class="why-num">03</div><div><h3>Alineación de intereses</h3><p>Co-invertimos en cada operación. Nuestra rentabilidad está directamente ligada a la tuya, no a comisiones de entrada.</p></div></div>
-      <div class="why-item"><div class="why-num">04</div><div><h3>Transparencia total</h3><p>Reporting periódico, visibilidad completa sobre cada activo y comunicación directa con el equipo gestor en todo momento.</p></div></div>
+    <div class="why-list">
+      <div class="why-item tl-fx" style="transition-delay:0s;"><div class="why-num">01</div><div><h3>Rigor en la selección</h3><p>Analizamos cientos de operaciones para seleccionar solo aquellas que superan nuestros criterios de rentabilidad, riesgo y liquidez. Menos del 5% de lo que vemos llega a nuestros inversores.</p></div></div>
+      <div class="why-item tl-fx" style="transition-delay:.12s;"><div class="why-num">02</div><div><h3>Acceso diferencial</h3><p>Nuestra red nos permite acceder a operaciones off-market habitualmente vetadas para el inversor particular. Llevamos ese acceso a nuestros clientes.</p></div></div>
+      <div class="why-item tl-fx" style="transition-delay:.24s;"><div class="why-num">03</div><div><h3>Alineación de intereses</h3><p>Co-invertimos en cada operación. Nuestra rentabilidad está directamente ligada a la tuya, no a comisiones de entrada.</p></div></div>
+      <div class="why-item tl-fx" style="transition-delay:.36s;"><div class="why-num">04</div><div><h3>Transparencia total</h3><p>Reporting periódico, visibilidad completa sobre cada activo y comunicación directa con el equipo gestor en todo momento.</p></div></div>
     </div>
   </div>
 </section>
@@ -587,6 +622,18 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el => io.observe(el));
+
+  // Timeline wipe-in effect (left to right, staggered)
+  const tlEls = document.querySelectorAll('.tl-fx');
+  const tlIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        tlIo.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  tlEls.forEach(el => tlIo.observe(el));
 
   // Contact form via Web3Forms
   const form = document.getElementById('contactForm');
