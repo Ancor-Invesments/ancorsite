@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ancor Investments — Inversión inmobiliaria off-market</title>
+<meta name="description" content="Ancor Investments: gestión de activos inmobiliarios, traspasos y operaciones off-market en Barcelona.">
+
+<!-- Favicons -->
+<link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/favicon/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/favicon/favicon-512.png">
+
+<!-- Vista previa al compartir (WhatsApp, LinkedIn, Facebook, iMessage...) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Ancor Investments">
+<meta property="og:title" content="Ancor Investments — Inversión inmobiliaria off-market">
+<meta property="og:description" content="Gestión de activos inmobiliarios, traspasos y operaciones off-market en Barcelona.">
+<meta property="og:image" content="https://ancorinvestments.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://ancorinvestments.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ancor Investments">
+<meta name="twitter:description" content="Inversión inmobiliaria off-market en Barcelona.">
+<meta name="twitter:image" content="https://ancorinvestments.com/assets/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0d1b2a;
+    --navy-2:#13253a;
+    --gold:#b8975a;
+    --gold-light:#d8c091;
+    --cream:#f4f1ea;
+    --ink:#e9e6de;
+    --line:rgba(233,230,222,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--navy);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  body.loading{overflow:hidden;height:100vh;}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;font-weight:500;}
+  a{color:inherit;text-decoration:none;}
+  .container{max-width:1180px;margin:0 auto;padding:0 32px;}
+  .eyebrow{
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);font-weight:500;
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto;} *{animation:none!important;transition:none!important;}}
+
+  /* PRELOADER */
+  #preloader{
+    position:fixed;inset:0;z-index:1000;
+    background:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .7s ease, visibility .7s ease;
+  }
+  #preloader .logo-wrap{
+    position:relative;width:min(260px,48vw);
+  }
+  #preloader img{
+    width:100%;display:block;
+    clip-path:inset(0 100% 0 0);
+    animation:wipeIn 1.3s cubic-bezier(.65,0,.15,1) .2s forwards;
+  }
+  #preloader.hide{opacity:0;visibility:hidden;pointer-events:none;}
+  @keyframes wipeIn{
+    to{clip-path:inset(0 0% 0 0);}
+  }
+  #preloader .fade-line{
+    position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);
+    width:1px;height:0;background:var(--gold);
+    animation:lineGrow .7s ease 1.5s forwards;
+  }
+  @keyframes lineGrow{to{height:26px;}}
+  @media(prefers-reduced-motion:reduce){
+    #preloader img{animation:none;clip-path:none;}
+  }
+
+  /* SCROLL REVEAL */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;}}
+
+
+  /* NAV */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:22px 0;
+    transition:background .3s ease, padding .3s ease, border-color .3s ease;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{background:rgba(13,27,42,0.92);backdrop-filter:blur(10px);padding:14px 0;border-color:var(--line);}
+  nav{display:flex;justify-content:space-between;align-items:center;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.06em;}
+  .logo img{height:26px;width:auto;display:block;}
+  .logo b{color:var(--gold);font-weight:600;}
+  .nav-links{display:flex;gap:36px;font-size:13px;letter-spacing:.03em;}
+  .nav-links a{opacity:.82;transition:opacity .2s;}
+  .nav-links a:hover{opacity:1;color:var(--gold-light);}
+  .nav-cta{
+    border:1px solid var(--gold);color:var(--gold-light);
+    padding:9px 20px;font-size:12px;letter-spacing:.05em;border-radius:2px;
+    transition:background .2s,color .2s;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--navy);}
+  .burger{display:none;background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;}
+
+  /* HERO */
+  .hero{
+    position:relative;height:100vh;min-height:640px;
+    display:flex;flex-direction:column;justify-content:flex-end;
+    overflow:hidden;
+  }
+  .hero video, .hero .hero-fallback{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    filter:saturate(0.9) brightness(0.75);
+  }
+  .hero-fallback{
+    background:
+      linear-gradient(160deg, rgba(13,27,42,0.4), rgba(13,27,42,0.9)),
+      repeating-linear-gradient(135deg, #14283d 0 2px, #0d1b2a 2px 40px);
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(13,27,42,0.55) 0%, rgba(13,27,42,0.35) 40%, rgba(13,27,42,0.96) 100%);
+    z-index:1;
+  }
+  .hero-content{position:relative;z-index:2;padding-bottom:64px;}
+  .hero-content .eyebrow{display:block;margin-bottom:18px;}
+  .hero-content h1{
+    font-size:clamp(38px,6vw,74px);
+    line-height:1.05;
+    max-width:820px;
+    color:var(--cream);
+  }
+  .hero-content h1 em{color:var(--gold-light);font-style:italic;}
+  .hero-content p{
+    max-width:480px;margin-top:22px;font-size:16px;color:rgba(233,230,222,0.78);
+  }
+  .hero-cta{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap;}
+  .btn{
+    padding:14px 28px;font-size:13px;letter-spacing:.04em;border-radius:2px;
+    display:inline-block;transition:all .25s ease;
+  }
+  .btn-primary{background:var(--gold);color:var(--navy);font-weight:500;}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-light);}
+
+  .stats{
+    position:relative;z-index:2;
+    border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(4,1fr);
+  }
+  .stats div{padding:26px 0 26px 0;text-align:center;border-left:1px solid var(--line);}
+  .stats div:first-child{border-left:none;}
+  .stats .num{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold-light);}
+  .stats .label{font-size:11px;letter-spacing:.06em;text-transform:uppercase;opacity:.65;margin-top:4px;}
+
+  /* SECTIONS */
+  section{padding:120px 0;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head h2{font-size:clamp(28px,3.4vw,44px);margin-top:14px;line-height:1.15;}
+  .section-head h2 em{color:var(--gold-light);font-style:italic;}
+
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .card{background:var(--navy);padding:38px 30px;}
+  .card h3{font-family:'Inter';font-weight:500;font-size:15px;color:var(--gold-light);margin-bottom:12px;letter-spacing:.02em;}
+  .card p{font-size:14px;opacity:.72;}
+
+  /* ACTIVOS */
+  .activos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:820px;margin:0 auto;}
+  .activo-card{
+    position:relative;border:1px solid var(--line);border-radius:2px;overflow:hidden;
+    padding:220px 26px 26px;background:var(--navy-2);
+    background-image:linear-gradient(180deg, rgba(13,27,42,0.05) 0%, rgba(13,27,42,0.97) 82%), var(--img);
+    background-size:cover;background-position:center;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .activo-card:hover{transform:translateY(-4px);border-color:var(--gold);}
+  .activo-tag{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);}
+  .activo-card h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;margin:10px 0 8px;}
+  .activo-card p{font-size:13px;opacity:.68;margin-bottom:16px;}
+  .activo-link{font-size:12px;color:var(--gold-light);border-bottom:1px solid var(--gold);padding-bottom:2px;}
+
+  /* POR QUE */
+  .timeline{border-top:1px solid var(--line);}
+  .tl-item{
+    display:grid;grid-template-columns:140px 1fr;gap:30px;
+    padding:30px 0;border-bottom:1px solid var(--line);
+  }
+  .tl-year{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold-light);}
+  .tl-item h3{font-size:16px;font-weight:500;margin-bottom:6px;}
+  .tl-item p{font-size:14px;opacity:.7;max-width:560px;}
+
+  .why-item{
+    display:grid;grid-template-columns:80px 1fr;gap:30px;
+    padding:34px 0;border-top:1px solid var(--line);
+  }
+  .why-item:last-child{border-bottom:1px solid var(--line);}
+  .why-num{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);opacity:.55;}
+  .why-item h3{font-family:'Inter';font-weight:500;font-size:18px;margin-bottom:8px;}
+  .why-item p{font-size:14px;opacity:.72;max-width:640px;}
+
+  /* EQUIPO */
+  .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:460px;margin:0 auto;}
+  .team-photo-card{
+    position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;
+    background:var(--navy-2);border:1px solid var(--line);
+    transition:transform .35s ease, border-color .35s ease;
+  }
+  .team-photo-card:hover{transform:translateY(-6px);border-color:var(--gold);}
+  .team-photo-card img{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    transition:transform .5s ease;
+  }
+  .team-photo-card:hover img{transform:scale(1.05);}
+  .team-photo-card .photo-placeholder{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    font-family:'Cormorant Garamond',serif;font-size:64px;color:var(--gold);
+    background:linear-gradient(160deg,#1b3350,#0d1b2a);
+  }
+  .team-photo-card .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(13,27,42,0) 40%, rgba(13,27,42,0.92) 100%);
+  }
+  .team-photo-card .info{
+    position:absolute;left:0;right:0;bottom:0;padding:22px;z-index:2;
+  }
+  .team-photo-card .role{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:4px;}
+  .team-photo-card h3{font-size:22px;margin-bottom:10px;}
+  .team-photo-card .li-link{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:12px;color:var(--ink);opacity:.85;
+    border:1px solid var(--line);border-radius:20px;padding:6px 12px;
+    transition:border-color .2s, color .2s;
+  }
+  .team-photo-card .li-link:hover{border-color:var(--gold);color:var(--gold-light);}
+  @media(max-width:560px){
+    .team-photo-card .info{padding:14px;}
+    .team-photo-card h3{font-size:16px;}
+  }
+
+  /* CONTACTO */
+  .contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .contact-info a{display:block;margin-top:14px;font-size:15px;color:var(--gold-light);}
+  form{display:flex;flex-direction:column;gap:14px;}
+  input,select,textarea{
+    background:var(--navy-2);border:1px solid var(--line);color:var(--ink);
+    padding:14px 16px;font-family:'Inter';font-size:14px;border-radius:2px;
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);}
+  textarea{resize:vertical;min-height:100px;}
+  .form-msg{font-size:13px;color:var(--gold-light);display:none;}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.6;flex-wrap:wrap;gap:12px;}
+
+  @media(max-width:900px){
+    .nav-links,.nav-cta{display:none;}
+    .burger{display:block;}
+    .grid-4{grid-template-columns:1fr 1fr;}
+    .activos-grid{grid-template-columns:1fr;}
+    .team-grid{max-width:340px;}
+    .contact-wrap{grid-template-columns:1fr;}
+    .stats{grid-template-columns:1fr 1fr;}
+    .stats div:nth-child(3){border-left:none;}
+  }
+</style>
+</head>
+<body class="loading">
+
+<div id="preloader" aria-hidden="true">
+  <div class="logo-wrap">
+    <img src="assets/logo-full.png" alt="Ancor Investments">
+    <div class="fade-line"></div>
+  </div>
+</div>
+
+<header id="siteHeader">
+  <nav class="container">
+    <div class="logo"><img src="assets/logo-mark.png" alt="Ancor Investments">ANCOR <b>INVESTMENTS</b></div>
+    <div class="nav-links">
+      <a href="#que-hacemos">Qué hacemos</a>
+      <a href="#activos">Activos</a>
+      <a href="#por-que">Por qué Ancor</a>
+      <a href="#equipo">Equipo</a>
+    </div>
+    <a href="#contacto" class="nav-cta">Hablar con un asesor</a>
+    <button class="burger">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <!-- Sustituye assets/hero-loop.mp4 y .webm por tu vídeo corto (8-15s, sin audio, que cierre el loop de forma continua). -->
+  <video autoplay muted loop playsinline poster="assets/hero-poster.jpg">
+    <source src="assets/hero-loop.webm" type="video/webm">
+    <source src="assets/hero-loop.mp4" type="video/mp4">
+  </video>
+  <div class="hero-fallback" aria-hidden="true"></div>
+
+  <div class="container hero-content">
+    <span class="eyebrow">Inversión Inmobiliaria · Barcelona</span>
+    <h1 style="max-width:960px;">15+ años estructurando <em>operaciones off-market</em> en Barcelona.</h1>
+    <div class="hero-cta">
+      <a href="#contacto" class="btn btn-primary">Hablar con un asesor</a>
+      <a href="#activos" class="btn btn-ghost">Ver activos</a>
+    </div>
+  </div>
+
+  <div class="container stats">
+    <div><div class="num">€200M+</div><div class="label">Activos bajo gestión</div></div>
+    <div><div class="num">15+</div><div class="label">Años de experiencia</div></div>
+    <div><div class="num">98%</div><div class="label">Satisfacción de inversores</div></div>
+    <div><div class="num">60+</div><div class="label">Operaciones cerradas</div></div>
+  </div>
+</section>
+
+<section id="que-hacemos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Qué hacemos</span>
+      <h2>Capital inteligente aplicado al <em>mercado inmobiliario</em></h2>
+    </div>
+    <div class="grid-4 reveal">
+      <div class="card"><h3>Activos residenciales</h3><p>Proyectos residenciales prime en mercados con alta demanda y liquidez contrastada.</p></div>
+      <div class="card"><h3>Activos terciarios</h3><p>Oficinas, locales y activos comerciales con contratos de renta a largo plazo.</p></div>
+      <div class="card"><h3>Gestión patrimonial</h3><p>Estructuración y optimización de carteras inmobiliarias para family offices.</p></div>
+      <div class="card"><h3>Inversión co-participada</h3><p>Acceso a operaciones de ticket elevado mediante co-inversión con otros inversores selectivos.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Criterios de inversión</span>
+      <h2>Qué tipo de <em>operación</em> buscamos</h2>
+    </div>
+    <div class="grid-4 reveal">
+      <div class="card"><h3>Ticket</h3><p>Desde 300.000€ hasta operaciones de varios millones, según el activo y la estructura.</p></div>
+      <div class="card"><h3>Tipo de activo</h3><p>Residencial, terciario, suelo y negocios en traspaso, priorizando liquidez y demanda contrastada.</p></div>
+      <div class="card"><h3>Zona</h3><p>Barcelona ciudad y área metropolitana, con operaciones puntuales en el resto de Cataluña.</p></div>
+      <div class="card"><h3>Estructura</h3><p>Inversión directa, co-inversión o gestión patrimonial, según el perfil del inversor.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="activos" style="background:var(--navy-2);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Activos destacados</span>
+      <h2>Operaciones <em>off-market</em> seleccionadas</h2>
+    </div>
+    <div class="activos-grid reveal">
+      <a href="https://ancor-invesments.github.io/LOCAL/" target="_blank" class="activo-card" style="--img:linear-gradient(160deg,#1b3350,#0d1b2a);">
+        <span class="activo-tag">Búsqueda activa · Eixample / Ciutat Vella</span>
+        <h3>Buscamos local +300 m²</h3>
+        <p>Con licencia de cafetería. Empresa en lanzamiento, decisión ágil.</p>
+        <span class="activo-link">Más información →</span>
+      </a>
+      <a href="https://ancor-invesments.github.io/suelosbarcelona/" target="_blank" class="activo-card" style="--img:linear-gradient(160deg,#2a4a6b,#0d1b2a);">
+        <span class="activo-tag">Suelo · Cataluña</span>
+        <h3>Portfolio de suelo</h3>
+        <p>Selección de activos de suelo e inversión en Barcelona.</p>
+        <span class="activo-link">Ver ficha →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="por-que">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nuestra trayectoria</span>
+      <h2>Cómo llegamos <em>hasta aquí</em></h2>
+    </div>
+    <!-- EDITA: años y hitos reales de Ancor Investments -->
+    <div class="timeline reveal">
+      <div class="tl-item"><div class="tl-year">20XX</div><div><h3>Fundación</h3><p>Descripción breve del origen de Ancor Investments.</p></div></div>
+      <div class="tl-item"><div class="tl-year">20XX</div><div><h3>Hito relevante</h3><p>Descripción de un momento clave: primera operación destacada, expansión de equipo, etc.</p></div></div>
+      <div class="tl-item"><div class="tl-year">Hoy</div><div><h3>Ancor Investments</h3><p>Consolidados como referencia en operaciones off-market en Barcelona.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="por-que-2">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Por qué Ancor</span>
+      <h2>Un socio <em>distinto</em> para un capital distinto.</h2>
+    </div>
+    <div class="why-list reveal">
+      <div class="why-item"><div class="why-num">01</div><div><h3>Rigor en la selección</h3><p>Analizamos cientos de operaciones para seleccionar solo aquellas que superan nuestros criterios de rentabilidad, riesgo y liquidez. Menos del 5% de lo que vemos llega a nuestros inversores.</p></div></div>
+      <div class="why-item"><div class="why-num">02</div><div><h3>Acceso diferencial</h3><p>Nuestra red nos permite acceder a operaciones off-market habitualmente vetadas para el inversor particular. Llevamos ese acceso a nuestros clientes.</p></div></div>
+      <div class="why-item"><div class="why-num">03</div><div><h3>Alineación de intereses</h3><p>Co-invertimos en cada operación. Nuestra rentabilidad está directamente ligada a la tuya, no a comisiones de entrada.</p></div></div>
+      <div class="why-item"><div class="why-num">04</div><div><h3>Transparencia total</h3><p>Reporting periódico, visibilidad completa sobre cada activo y comunicación directa con el equipo gestor en todo momento.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo" style="background:var(--navy-2);">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Equipo</span>
+      <h2>Personas detrás de <em>cada operación</em></h2>
+    </div>
+    <div class="team-grid reveal">
+      <a class="team-photo-card" href="https://www.linkedin.com/in/greta-carabonela-694226b7" target="_blank" rel="noopener">
+        <img src="assets/team-greta.jpg" alt="Greta Carabonela">
+        <div class="overlay"></div>
+        <div class="info">
+          <div class="role">CEO</div>
+          <h3>Greta Carabonela</h3>
+          <span class="li-link">LinkedIn →</span>
+        </div>
+      </a>
+      <a class="team-photo-card" href="https://www.linkedin.com/in/fernando-benitez-rojas" target="_blank" rel="noopener">
+        <img src="assets/team-fernando.jpg" alt="Fernando Benítez">
+        <div class="overlay"></div>
+        <div class="info">
+          <div class="role">Consultor inmobiliario</div>
+          <h3>Fernando Benítez</h3>
+          <span class="li-link">LinkedIn →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container contact-wrap reveal">
+    <div class="contact-info">
+      <span class="eyebrow">Contacto</span>
+      <h2 class="serif" style="font-size:36px;margin-top:14px;">Hablemos de tu <em style="color:var(--gold-light);font-style:italic;">próxima inversión.</em></h2>
+      <p style="margin-top:16px;opacity:.72;font-size:14px;max-width:380px;">Si gestionas un patrimonio privado o un family office y buscas acceso a oportunidades inmobiliarias seleccionadas, estamos aquí para escucharte.</p>
+      <a href="mailto:info@ancorinvestments.com">info@ancorinvestments.com</a>
+      <a href="https://wa.me/34639892823" target="_blank">WhatsApp · +34 639 89 28 23</a>
+      <a href="https://www.linkedin.com/company/ancor-investments/" target="_blank">LinkedIn · Ancor Investments</a>
+    </div>
+    <form id="contactForm">
+      <!-- Sustituye YOUR_ANCOR_WEB3FORMS_KEY por una access key de Web3Forms propia de Ancor (distinta de la personal de Fer) -->
+      <input type="hidden" name="access_key" value="YOUR_ANCOR_WEB3FORMS_KEY">
+      <input type="text" name="nombre" placeholder="Nombre" required>
+      <input type="text" name="empresa" placeholder="Empresa / Familia">
+      <input type="email" name="email" placeholder="Email" required>
+      <select name="perfil" required>
+        <option value="">Perfil de inversor</option>
+        <option>Inversor privado</option>
+        <option>Family office</option>
+        <option>Multi-family office</option>
+        <option>Otro</option>
+      </select>
+      <textarea name="mensaje" placeholder="Mensaje"></textarea>
+      <button type="submit" class="btn btn-primary">Enviar consulta</button>
+      <span class="form-msg" id="formMsg">Mensaje recibido. Nos pondremos en contacto en 24–48 h.</span>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-row">
+    <span>© 2026 Ancor Investments. Todos los derechos reservados.</span>
+    <span>Barcelona, España</span>
+  </div>
+</footer>
+
+<script>
+  // Preloader: muestra el logo un mínimo de tiempo y luego funde al sitio
+  const preloader = document.getElementById('preloader');
+  const MIN_DISPLAY = 1600; // ms — sube o baja este número para ajustar cuánto dura el logo
+  const start = Date.now();
+  window.addEventListener('load', () => {
+    const elapsed = Date.now() - start;
+    const wait = Math.max(0, MIN_DISPLAY - elapsed);
+    setTimeout(() => {
+      preloader.classList.add('hide');
+      document.body.classList.remove('loading');
+    }, wait);
+  });
+  // Failsafe: si algo tarda demasiado en cargar, no bloquea la web más de 4s
+  setTimeout(() => {
+    preloader.classList.add('hide');
+    document.body.classList.remove('loading');
+  }, 4000);
+
+  // Nav background on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Contact form via Web3Forms
+  const form = document.getElementById('contactForm');
+  const msg = document.getElementById('formMsg');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
+      const json = await res.json();
+      if (json.success) {
+        form.reset();
+        msg.style.display = 'block';
+      }
+    } catch (err) { console.error(err); }
+  });
+</script>
+
+</body>
+</html>
