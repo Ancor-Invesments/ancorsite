@@ -219,6 +219,95 @@
   .activo-card p{font-size:13px;opacity:.68;margin-bottom:16px;}
   .activo-link{font-size:12px;color:var(--gold-light);border-bottom:1px solid var(--gold);padding-bottom:2px;}
 
+  /* CONSULTA WIZARD */
+  .consult-wrap{
+    margin-top:48px;border:1px solid var(--line);border-radius:6px;
+    background:var(--navy);padding:44px;position:relative;overflow:hidden;
+  }
+  .consult-head{margin-bottom:32px;}
+  .consult-head .eyebrow{display:block;margin-bottom:10px;}
+  .consult-head h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;}
+  .consult-head p{font-size:14px;opacity:.68;margin-top:8px;max-width:520px;}
+
+  .af-progress{display:flex;align-items:center;gap:14px;margin-bottom:36px;}
+  .af-progress-track{flex:1;height:2px;background:var(--line);position:relative;border-radius:2px;overflow:hidden;}
+  .af-progress-fill{position:absolute;left:0;top:0;bottom:0;width:33.33%;background:var(--gold);transition:width .5s cubic-bezier(.65,0,.15,1);}
+  .af-progress-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);white-space:nowrap;}
+
+  .af-step{display:none;}
+  .af-step.active{display:block;animation:afFadeIn .5s ease;}
+  @keyframes afFadeIn{from{opacity:0;transform:translateX(14px);}to{opacity:1;transform:translateX(0);}}
+  .af-step h4{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:6px;}
+  .af-step .af-sub{font-size:13px;opacity:.62;margin-bottom:24px;}
+
+  .af-options-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .af-option-card{
+    border:1px solid var(--line);border-radius:4px;padding:22px 16px;text-align:center;
+    cursor:pointer;transition:border-color .2s,background .2s,transform .2s;
+    background:var(--navy-2);
+  }
+  .af-option-card:hover{border-color:rgba(184,151,90,0.5);transform:translateY(-2px);}
+  .af-option-card.selected{border-color:var(--gold);background:rgba(184,151,90,0.08);}
+  .af-option-card svg{width:30px;height:30px;margin:0 auto 12px;display:block;stroke:var(--gold-light);}
+  .af-option-card.selected svg{stroke:var(--gold);}
+  .af-option-card span{font-size:12.5px;line-height:1.3;display:block;}
+
+  .af-range-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .af-range-btn{
+    border:1px solid var(--line);border-radius:4px;padding:18px 10px;text-align:center;
+    cursor:pointer;transition:border-color .2s,background .2s;background:var(--navy-2);
+    font-family:'Cormorant Garamond',serif;font-size:17px;color:var(--ink);
+  }
+  .af-range-btn:hover{border-color:rgba(184,151,90,0.5);}
+  .af-range-btn.selected{border-color:var(--gold);background:rgba(184,151,90,0.08);color:var(--gold-light);}
+
+  .af-fields{display:flex;flex-direction:column;gap:14px;max-width:480px;}
+  .af-fields input,.af-fields textarea{
+    background:var(--navy-2);border:1px solid var(--line);color:var(--ink);
+    padding:13px 15px;font-family:'Inter';font-size:14px;border-radius:3px;
+  }
+  .af-fields input:focus,.af-fields textarea:focus{outline:none;border-color:var(--gold);}
+
+  .af-nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;}
+  .af-back{font-size:13px;opacity:.6;cursor:pointer;transition:opacity .2s;}
+  .af-back:hover{opacity:1;}
+  .af-next{
+    background:var(--gold);color:var(--navy);border:none;padding:13px 30px;
+    font-family:'Inter';font-size:13px;letter-spacing:.03em;border-radius:3px;cursor:pointer;
+    transition:background .2s;
+  }
+  .af-next:hover{background:var(--gold-light);}
+  .af-next:disabled{opacity:.35;cursor:not-allowed;}
+
+  .af-done{display:none;text-align:center;padding:20px 0;}
+  .af-done.active{display:block;animation:afFadeIn .5s ease;}
+  .af-done svg{width:44px;height:44px;stroke:var(--gold);margin:0 auto 18px;display:block;}
+  .af-done h4{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;margin-bottom:10px;}
+  .af-done p{font-size:14px;opacity:.7;max-width:440px;margin:0 auto 20px;}
+  .af-summary{
+    display:inline-block;text-align:left;border:1px solid var(--line);border-radius:4px;
+    padding:18px 22px;font-size:13px;opacity:.8;
+  }
+  .af-summary div{padding:4px 0;}
+  .af-summary b{color:var(--gold-light);font-weight:500;}
+
+  @media(max-width:640px){
+    .consult-wrap{padding:28px 20px;}
+    .af-options-grid{grid-template-columns:1fr 1fr;}
+    .af-range-grid{grid-template-columns:1fr 1fr;}
+  }
+
+  #activos{position:relative;overflow:hidden;background:#1a140c;}
+  #activos::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background-image:
+      radial-gradient(ellipse 900px 600px at 15% 10%, rgba(184,151,90,0.16), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 90% 90%, rgba(184,151,90,0.10), transparent 60%),
+      linear-gradient(155deg, #1a140c 0%, #2b2013 50%, #1a140c 100%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  }
+  #activos .container{position:relative;z-index:1;}
+
   /* POR QUE */
   .timeline{border-top:1px solid var(--line);}
   .tl-item{
@@ -342,7 +431,10 @@
   textarea{resize:vertical;min-height:100px;}
   .form-msg{font-size:13px;color:var(--gold-light);display:none;}
 
-  footer{border-top:1px solid var(--line);padding:40px 0;}
+  footer{border-top:1px solid var(--line);padding:44px 0 40px;}
+  .footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:24px;font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.06em;}
+  .footer-logo img{height:24px;width:auto;display:block;}
+  .footer-logo b{color:var(--gold);font-weight:600;}
   .footer-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.6;flex-wrap:wrap;gap:12px;}
 
   @media(max-width:900px){
@@ -441,25 +533,96 @@
   </div>
 </section>
 
-<section id="activos" style="background:var(--navy-2);">
+<section id="activos">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Activos destacados</span>
       <h2>Operaciones <em>off-market</em> seleccionadas</h2>
     </div>
-    <div class="activos-grid reveal">
-      <a href="https://ancor-invesments.github.io/LOCAL/" target="_blank" class="activo-card" style="--img:linear-gradient(160deg,#1b3350,#0d1b2a);">
-        <span class="activo-tag">Búsqueda activa · Eixample / Ciutat Vella</span>
-        <h3>Buscamos local +300 m²</h3>
-        <p>Con licencia de cafetería. Empresa en lanzamiento, decisión ágil.</p>
-        <span class="activo-link">Más información →</span>
-      </a>
-      <a href="https://ancor-invesments.github.io/suelosbarcelona/" target="_blank" class="activo-card" style="--img:linear-gradient(160deg,#2a4a6b,#0d1b2a);">
-        <span class="activo-tag">Suelo · Cataluña</span>
-        <h3>Portfolio de suelo</h3>
-        <p>Selección de activos de suelo e inversión en Barcelona.</p>
-        <span class="activo-link">Ver ficha →</span>
-      </a>
+    <div class="consult-wrap reveal">
+      <div class="consult-head">
+        <span class="eyebrow">¿Tenés un activo o buscás uno?</span>
+        <h3>Consultá nuestra cartera</h3>
+        <p>Contanos qué tipo de operación te interesa y te haremos llegar la información en breve.</p>
+      </div>
+
+      <div class="af-progress">
+        <span class="af-progress-label" id="afProgressLabel">Paso 1 de 3</span>
+        <div class="af-progress-track"><div class="af-progress-fill" id="afProgressFill"></div></div>
+      </div>
+
+      <form id="afForm">
+        <!-- EDITA: reemplaza por una access key de Web3Forms propia de Ancor -->
+        <input type="hidden" name="access_key" value="YOUR_ANCOR_WEB3FORMS_KEY">
+        <input type="hidden" name="subject" value="Nueva consulta de cartera — Ancor Investments">
+
+        <!-- PASO 1: Tipología (selección múltiple) -->
+        <div class="af-step active" data-step="1">
+          <h4>Tipología de activo</h4>
+          <p class="af-sub">Podés seleccionar más de una opción.</p>
+          <div class="af-options-grid" id="afTipologia">
+            <div class="af-option-card" data-value="Nave industrial">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M3 20V10l4-4 4 4v10"/><path d="M11 20V10l4-4 4 4v10"/><path d="M7 20v-5h4v5"/></svg>
+              <span>Nave industrial</span>
+            </div>
+            <div class="af-option-card" data-value="Suelo a desarrollar">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M5 20V9l7-5 7 5v11"/><path d="M9 20v-6h6v6"/><path d="M12 4v5"/></svg>
+              <span>Suelo a desarrollar</span>
+            </div>
+            <div class="af-option-card" data-value="Suelo residencial">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="10" rx="1"/><path d="M3 10l9-6 9 6"/><path d="M12 20v-6"/></svg>
+              <span>Suelo residencial</span>
+            </div>
+            <div class="af-option-card" data-value="Edificio">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M9 8h1M14 8h1M9 12h1M14 12h1M9 16h1M14 16h1"/></svg>
+              <span>Edificio</span>
+            </div>
+          </div>
+          <div class="af-nav">
+            <span></span>
+            <button type="button" class="af-next" id="afNext1" disabled>Continuar →</button>
+          </div>
+        </div>
+
+        <!-- PASO 2: Rango de inversión -->
+        <div class="af-step" data-step="2">
+          <h4>Rango de inversión</h4>
+          <p class="af-sub">Aproximado, solo para orientarnos.</p>
+          <div class="af-range-grid" id="afRango">
+            <div class="af-range-btn" data-value="Menos de 300.000€">&lt; 300k€</div>
+            <div class="af-range-btn" data-value="300.000€ – 1M€">300k–1M€</div>
+            <div class="af-range-btn" data-value="1M€ – 3M€">1M–3M€</div>
+            <div class="af-range-btn" data-value="Más de 3M€">+3M€</div>
+          </div>
+          <div class="af-nav">
+            <span class="af-back" data-back="1">← Paso anterior</span>
+            <button type="button" class="af-next" id="afNext2" disabled>Continuar →</button>
+          </div>
+        </div>
+
+        <!-- PASO 3: Contacto -->
+        <div class="af-step" data-step="3">
+          <h4>Tus datos de contacto</h4>
+          <p class="af-sub">Te contactamos en menos de 24-48h.</p>
+          <div class="af-fields">
+            <input type="text" name="nombre" id="afNombre" placeholder="Nombre completo" required>
+            <input type="email" name="email" id="afEmail" placeholder="Email" required>
+            <input type="tel" name="telefono" placeholder="Teléfono (opcional)">
+            <textarea name="comentario" rows="3" placeholder="Comentario adicional (opcional)"></textarea>
+          </div>
+          <div class="af-nav">
+            <span class="af-back" data-back="2">← Paso anterior</span>
+            <button type="submit" class="af-next" id="afSubmit">Enviar consulta →</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="af-done" id="afDone">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+        <h4>Consulta recibida</h4>
+        <p>Gracias por tu interés. Nuestro equipo revisará tu solicitud y te haremos llegar la información en breve, con una propuesta ajustada a lo que buscás.</p>
+        <div class="af-summary" id="afSummary"></div>
+      </div>
     </div>
   </div>
 </section>
@@ -519,15 +682,16 @@
           <span class="li-link">LinkedIn →</span>
         </div>
       </a>
-      <!-- EDITA: reemplaza cuando tengas nombre, cargo, foto y LinkedIn de la tercera persona -->
-      <div class="team-photo-card team-photo-card--center">
-        <div class="photo-placeholder">+</div>
+      <!-- Ludivine Gautard -->
+      <a class="team-photo-card team-photo-card--center" href="https://www.linkedin.com/in/ludivine-gautard" target="_blank" rel="noopener">
+        <img src="assets/team-ludivine.jpg" alt="Ludivine Gautard">
         <div class="overlay"></div>
         <div class="info">
-          <div class="role">Próximamente</div>
-          <h3>Nuevo miembro</h3>
+          <div class="role">Investment Consultant & Strategic Account Manager</div>
+          <h3>Ludivine Gautard</h3>
+          <span class="li-link">LinkedIn →</span>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -563,9 +727,12 @@
 </section>
 
 <footer>
-  <div class="container footer-row">
-    <span>© 2026 Ancor Investments. Todos los derechos reservados.</span>
-    <span>Barcelona, España</span>
+  <div class="container">
+    <div class="footer-logo"><img src="assets/logo-mark.png" alt="Ancor Investments">ANCOR <b>INVESTMENTS</b></div>
+    <div class="footer-row">
+      <span>© 2026 Ancor Investments. Todos los derechos reservados.</span>
+      <span>Barcelona, España</span>
+    </div>
   </div>
 </footer>
 
@@ -634,6 +801,93 @@
     });
   }, { threshold: 0.3 });
   tlEls.forEach(el => tlIo.observe(el));
+
+  // Consulta cartera — wizard
+  (function(){
+    const form = document.getElementById('afForm');
+    if (!form) return;
+    const steps = form.querySelectorAll('.af-step');
+    const progressFill = document.getElementById('afProgressFill');
+    const progressLabel = document.getElementById('afProgressLabel');
+    const totalSteps = steps.length;
+    let selectedTipologias = [];
+    let selectedRango = null;
+
+    function goToStep(n){
+      steps.forEach(s => s.classList.toggle('active', s.dataset.step === String(n)));
+      progressFill.style.width = (n / totalSteps * 100) + '%';
+      progressLabel.textContent = 'Paso ' + n + ' de ' + totalSteps;
+    }
+
+    // Paso 1: tipología (selección múltiple)
+    const tipologiaCards = document.querySelectorAll('#afTipologia .af-option-card');
+    const next1 = document.getElementById('afNext1');
+    tipologiaCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const val = card.dataset.value;
+        card.classList.toggle('selected');
+        if (card.classList.contains('selected')) {
+          selectedTipologias.push(val);
+        } else {
+          selectedTipologias = selectedTipologias.filter(v => v !== val);
+        }
+        next1.disabled = selectedTipologias.length === 0;
+      });
+    });
+    next1.addEventListener('click', () => goToStep(2));
+
+    // Paso 2: rango (selección única)
+    const rangoBtns = document.querySelectorAll('#afRango .af-range-btn');
+    const next2 = document.getElementById('afNext2');
+    rangoBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        rangoBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedRango = btn.dataset.value;
+        next2.disabled = false;
+      });
+    });
+    next2.addEventListener('click', () => goToStep(3));
+
+    // Volver atrás
+    form.querySelectorAll('.af-back').forEach(b => {
+      b.addEventListener('click', () => goToStep(parseInt(b.dataset.back)));
+    });
+
+    // Envío final
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('afSubmit');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando…';
+
+      const data = new FormData(form);
+      data.append('tipologia', selectedTipologias.join(', '));
+      data.append('rango_inversion', selectedRango || '');
+
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+        const json = await res.json();
+        if (json.success) {
+          document.getElementById('afSummary').innerHTML =
+            '<div><b>Tipología:</b> ' + selectedTipologias.join(', ') + '</div>' +
+            '<div><b>Rango:</b> ' + (selectedRango || '—') + '</div>' +
+            '<div><b>Nombre:</b> ' + document.getElementById('afNombre').value + '</div>' +
+            '<div><b>Email:</b> ' + document.getElementById('afEmail').value + '</div>';
+          form.style.display = 'none';
+          document.querySelector('.af-progress').style.display = 'none';
+          document.getElementById('afDone').classList.add('active');
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Enviar consulta →';
+        }
+      } catch (err) {
+        console.error(err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar consulta →';
+      }
+    });
+  })();
 
   // Contact form via Web3Forms
   const form = document.getElementById('contactForm');
