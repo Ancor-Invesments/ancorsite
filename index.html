@@ -219,7 +219,53 @@
   .activo-card p{font-size:13px;opacity:.68;margin-bottom:16px;}
   .activo-link{font-size:12px;color:var(--gold-light);border-bottom:1px solid var(--gold);padding-bottom:2px;}
 
-  /* CONSULTA WIZARD */
+  /* MAPA EIXAMPLE */
+  #explora-mapa{position:relative;overflow:hidden;}
+  .em-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;max-width:980px;margin:0 auto;}
+  .em-block{cursor:pointer;transition:fill .2s,stroke .2s;}
+  .em-block-label{font-size:9px;fill:rgba(233,230,222,0.55);pointer-events:none;transition:fill .2s;font-family:'Inter';}
+  .em-panel{
+    border:1px solid var(--line);border-radius:6px;padding:26px 28px;min-height:200px;
+    display:flex;flex-direction:column;justify-content:center;
+  }
+  .em-panel-empty{font-size:13.5px;opacity:.55;text-align:center;}
+  .em-panel-zone{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-light);margin-bottom:8px;}
+  .em-panel-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--cream);margin-bottom:10px;}
+  .em-panel-desc{font-size:13.5px;opacity:.72;margin-bottom:20px;line-height:1.6;}
+  @media(max-width:800px){
+    .em-wrap{grid-template-columns:1fr;}
+  }
+
+  #perfil-inversor{position:relative;overflow:hidden;background:var(--navy-2);}
+  .pi-wrap{max-width:640px;margin:0 auto;text-align:center;}
+  .pi-quiz{
+    border:1px solid var(--line);border-radius:6px;background:var(--navy);
+    padding:44px;text-align:left;margin-top:8px;
+  }
+  .pi-q-options{display:grid;grid-template-columns:1fr;gap:12px;}
+  .pi-q-option{
+    border:1px solid var(--line);border-radius:4px;padding:16px 20px;cursor:pointer;
+    transition:border-color .2s,background .2s;background:var(--navy-2);font-size:14.5px;
+  }
+  .pi-q-option:hover{border-color:rgba(184,151,90,0.5);}
+  .pi-q-option.selected{border-color:var(--gold);background:rgba(184,151,90,0.08);color:var(--gold-light);}
+
+  .pi-result{display:none;text-align:center;}
+  .pi-result.active{display:block;animation:afFadeIn .6s ease;}
+  .pi-chart-wrap{max-width:320px;margin:0 auto 8px;}
+  .pi-chart-wrap svg{width:100%;height:auto;}
+  .pi-dot{transition:cx 1.1s cubic-bezier(.34,1.56,.64,1), cy 1.1s cubic-bezier(.34,1.56,.64,1);}
+  .pi-profile-name{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold-light);margin:18px 0 10px;}
+  .pi-profile-desc{font-size:14.5px;opacity:.75;max-width:460px;margin:0 auto 20px;}
+  .pi-tipologias{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+  .pi-chip{border:1px solid var(--gold);color:var(--gold-light);border-radius:20px;padding:7px 16px;font-size:12.5px;}
+  .pi-restart{font-size:12.5px;opacity:.55;cursor:pointer;margin-top:6px;display:inline-block;}
+  .pi-restart:hover{opacity:.9;}
+
+  @media(max-width:640px){
+    .pi-quiz{padding:26px 20px;}
+  }
+
   .consult-wrap{
     margin-top:48px;border:1px solid var(--line);border-radius:6px;
     background:var(--navy);padding:44px;position:relative;overflow:hidden;
@@ -533,6 +579,98 @@
   </div>
 </section>
 
+<section id="perfil-inversor">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center;margin:0 auto 8px;">
+      <span class="eyebrow">Descubre tu perfil</span>
+      <h2>¿Qué tipo de <em>inversor</em> eres?</h2>
+      <p style="margin-top:14px;opacity:.7;font-size:14.5px;">Respondé 3 preguntas rápidas y te mostramos tu perfil de inversión, con las oportunidades que mejor encajan.</p>
+    </div>
+
+    <div class="pi-wrap reveal">
+      <div class="pi-quiz" id="piQuiz">
+
+        <div class="af-progress">
+          <span class="af-progress-label" id="piProgressLabel">Pregunta 1 de 3</span>
+          <div class="af-progress-track"><div class="af-progress-fill" id="piProgressFill" style="width:33.33%;"></div></div>
+        </div>
+
+        <div class="af-step active" data-pistep="1">
+          <h4>¿Cuál es tu objetivo principal?</h4>
+          <div class="pi-q-options" data-axis="x">
+            <div class="pi-q-option" data-val="10">Preservar y proteger mi patrimonio</div>
+            <div class="pi-q-option" data-val="50">Diversificar mi cartera de inversión</div>
+            <div class="pi-q-option" data-val="90">Maximizar la rentabilidad</div>
+          </div>
+        </div>
+
+        <div class="af-step" data-pistep="2">
+          <h4>¿Qué nivel de involucramiento prefieres?</h4>
+          <div class="pi-q-options" data-axis="y">
+            <div class="pi-q-option" data-val="10">Totalmente pasivo, solo quiero resultados</div>
+            <div class="pi-q-option" data-val="50">Consultado en las decisiones clave</div>
+            <div class="pi-q-option" data-val="90">Activo, quiero co-invertir de cerca</div>
+          </div>
+        </div>
+
+        <div class="af-step" data-pistep="3">
+          <h4>Rango de inversión aproximado</h4>
+          <div class="af-range-grid" id="piRango">
+            <div class="af-range-btn" data-value="Menos de 300.000€">&lt; 300k€</div>
+            <div class="af-range-btn" data-value="300.000€ – 1M€">300k–1M€</div>
+            <div class="af-range-btn" data-value="1M€ – 3M€">1M–3M€</div>
+            <div class="af-range-btn" data-value="Más de 3M€">+3M€</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pi-result" id="piResult">
+        <div class="pi-chart-wrap">
+          <svg viewBox="0 0 240 240">
+            <line x1="20" y1="120" x2="220" y2="120" stroke="rgba(233,230,222,0.14)" stroke-width="1"/>
+            <line x1="120" y1="20" x2="120" y2="220" stroke="rgba(233,230,222,0.14)" stroke-width="1"/>
+            <rect x="20" y="20" width="200" height="200" fill="none" stroke="rgba(233,230,222,0.14)" stroke-width="1"/>
+            <text x="120" y="14" text-anchor="middle" fill="#b8975a" font-size="9" letter-spacing="1" font-family="Inter">ACTIVO</text>
+            <text x="120" y="234" text-anchor="middle" fill="#b8975a" font-size="9" letter-spacing="1" font-family="Inter">PASIVO</text>
+            <text x="8" y="124" text-anchor="middle" fill="#b8975a" font-size="9" letter-spacing="1" font-family="Inter" transform="rotate(-90 8 124)">PRESERVAR</text>
+            <text x="232" y="124" text-anchor="middle" fill="#b8975a" font-size="9" letter-spacing="1" font-family="Inter" transform="rotate(-90 232 124)">RENTABILIDAD</text>
+            <circle class="pi-dot" id="piDot" cx="120" cy="120" r="7" fill="#b8975a"/>
+          </svg>
+        </div>
+        <div class="pi-profile-name" id="piProfileName"></div>
+        <div class="pi-profile-desc" id="piProfileDesc"></div>
+        <div class="pi-tipologias" id="piTipologias"></div>
+        <a href="#activos" class="btn btn-primary" id="piCta">Consultar oportunidades para este perfil →</a>
+        <div><span class="pi-restart" id="piRestart">Volver a hacer el quiz</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="explora-mapa" style="background:var(--navy-2);">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center;margin:0 auto 40px;">
+      <span class="eyebrow">Cartera por zona</span>
+      <h2>Explora el <em>Eixample</em></h2>
+      <p style="margin-top:14px;opacity:.7;font-size:14.5px;max-width:520px;margin-left:auto;margin-right:auto;">Toca una manzana del barrio que te interese y te contamos qué estamos viendo ahí ahora mismo.</p>
+    </div>
+
+    <div class="em-wrap reveal">
+      <svg id="emGrid" viewBox="0 0 460 320" style="width:100%;height:auto;"></svg>
+
+      <div class="em-panel" id="emPanel">
+        <div class="em-panel-empty" id="emEmpty">Toca una manzana en el mapa para ver la zona</div>
+        <div id="emContent" style="display:none;">
+          <div class="em-panel-zone" id="emZoneTag"></div>
+          <div class="em-panel-title" id="emZoneTitle"></div>
+          <div class="em-panel-desc" id="emZoneDesc"></div>
+          <a href="#activos" class="btn btn-primary" id="emCta" style="font-size:12.5px;padding:11px 22px;">Consultar sobre esta zona →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="activos">
   <div class="container">
     <div class="section-head reveal">
@@ -541,9 +679,9 @@
     </div>
     <div class="consult-wrap reveal">
       <div class="consult-head">
-        <span class="eyebrow">¿Tenés un activo o buscás uno?</span>
-        <h3>Consultá nuestra cartera</h3>
-        <p>Contanos qué tipo de operación te interesa y te haremos llegar la información en breve.</p>
+        <span class="eyebrow">¿Tienes un activo o buscas uno?</span>
+        <h3>Consulta nuestra cartera</h3>
+        <p>Cuéntanos qué tipo de operación te interesa y te haremos llegar la información en breve.</p>
       </div>
 
       <div class="af-progress">
@@ -555,6 +693,7 @@
         <!-- EDITA: reemplaza por una access key de Web3Forms propia de Ancor -->
         <input type="hidden" name="access_key" value="YOUR_ANCOR_WEB3FORMS_KEY">
         <input type="hidden" name="subject" value="Nueva consulta de cartera — Ancor Investments">
+        <input type="hidden" name="zona_interes" id="afZonaInteres" value="">
 
         <!-- PASO 1: Tipología (selección múltiple) -->
         <div class="af-step active" data-step="1">
@@ -620,7 +759,7 @@
       <div class="af-done" id="afDone">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
         <h4>Consulta recibida</h4>
-        <p>Gracias por tu interés. Nuestro equipo revisará tu solicitud y te haremos llegar la información en breve, con una propuesta ajustada a lo que buscás.</p>
+        <p>Gracias por tu interés. Nuestro equipo revisará tu solicitud y te haremos llegar la información en breve, con una propuesta ajustada a lo que buscas.</p>
         <div class="af-summary" id="afSummary"></div>
       </div>
     </div>
@@ -802,6 +941,199 @@
   }, { threshold: 0.3 });
   tlEls.forEach(el => tlIo.observe(el));
 
+  // Explora el Eixample — mapa interactivo
+  (function(){
+    const svg = document.getElementById('emGrid');
+    if (!svg) return;
+
+    // EDITA: descripciones ilustrativas — reemplaza por datos reales de tu cartera por zona
+    const zones = [
+      { name: 'Dreta de l\'Eixample', desc: 'La zona con mayor densidad comercial y de oficinas del distrito. Alta demanda de locales y edificios de renta.' },
+      { name: 'Sagrada Família', desc: 'Entorno turístico consolidado, fuerte tensión de precios. Ideal para activos de alto valor con recorrido de revalorización.' },
+      { name: 'Fort Pienc', desc: 'Zona en transformación, buena relación precio-potencial. Interesante para suelo a desarrollar.' },
+      { name: 'Antiga Esquerra', desc: 'Predominio residencial de alto standing, edificios de época bien conservados.' },
+      { name: 'Nova Esquerra', desc: 'Mezcla residencial y terciaria, buena conectividad. Activos con perfil de rentabilidad estable.' },
+      { name: 'Sant Antoni', desc: 'Barrio en plena revalorización, alta demanda de locales comerciales y naves de proximidad.' }
+    ];
+
+    const cols = 3, rows = 2, size = 118, gap = 20;
+    const offX = (460 - (cols*size + (cols-1)*gap)) / 2;
+    const offY = (320 - (rows*(size-20) + (rows-1)*gap)) / 2;
+    let i = 0;
+    const svgNS = 'http://www.w3.org/2000/svg';
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (i >= zones.length) break;
+        const x = offX + c*(size+gap);
+        const y = offY + r*(size-20+gap);
+        const cx = x + size/2, cy = y + (size-20)/2, rad = size/2 - 6;
+        const pts = [];
+        for (let k = 0; k < 8; k++) {
+          const ang = Math.PI/8 + k*Math.PI/4;
+          pts.push((cx+rad*Math.sin(ang)).toFixed(1)+','+(cy-rad*0.72*Math.cos(ang)).toFixed(1));
+        }
+        const poly = document.createElementNS(svgNS, 'polygon');
+        poly.setAttribute('points', pts.join(' '));
+        poly.setAttribute('class', 'em-block');
+        poly.setAttribute('fill', 'var(--navy)');
+        poly.setAttribute('stroke', 'rgba(233,230,222,0.18)');
+        poly.setAttribute('stroke-width', '1');
+
+        const label = document.createElementNS(svgNS, 'text');
+        label.setAttribute('x', cx);
+        label.setAttribute('y', cy + 4);
+        label.setAttribute('text-anchor', 'middle');
+        label.setAttribute('class', 'em-block-label');
+        label.textContent = zones[i].name;
+
+        (function(zone, polyEl, labelEl){
+          polyEl.addEventListener('click', () => {
+            svg.querySelectorAll('.em-block').forEach(p => p.setAttribute('fill', 'var(--navy)'));
+            polyEl.setAttribute('fill', 'rgba(184,151,90,0.22)');
+            polyEl.setAttribute('stroke', '#b8975a');
+
+            document.getElementById('emEmpty').style.display = 'none';
+            document.getElementById('emContent').style.display = 'block';
+            document.getElementById('emZoneTag').textContent = 'Eixample · Barcelona';
+            document.getElementById('emZoneTitle').textContent = zone.name;
+            document.getElementById('emZoneDesc').textContent = zone.desc;
+            document.getElementById('afZonaInteres').value = zone.name;
+          });
+          polyEl.addEventListener('mouseenter', () => {
+            if (polyEl.getAttribute('stroke') !== '#b8975a') polyEl.setAttribute('stroke', 'rgba(184,151,90,0.6)');
+          });
+          polyEl.addEventListener('mouseleave', () => {
+            if (polyEl.getAttribute('stroke') !== '#b8975a') polyEl.setAttribute('stroke', 'rgba(233,230,222,0.18)');
+          });
+        })(zones[i], poly, label);
+
+        svg.appendChild(poly);
+        svg.appendChild(label);
+        i++;
+      }
+    }
+
+    document.getElementById('emCta').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('activos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  })();
+
+  // Perfil de inversor — quiz interactivo
+  (function(){
+    const quiz = document.getElementById('piQuiz');
+    if (!quiz) return;
+    const steps = quiz.querySelectorAll('.af-step');
+    const progressFill = document.getElementById('piProgressFill');
+    const progressLabel = document.getElementById('piProgressLabel');
+    const total = steps.length;
+    let xVal = null, yVal = null, rangoVal = null;
+    let currentTipologias = [];
+
+    const profiles = {
+      'preservar-pasivo': {
+        name: 'Inversor Patrimonial',
+        desc: 'Buscas preservar y hacer crecer tu patrimonio de forma estable, sin involucrarte en la gestión operativa. Priorizamos activos consolidados, con contratos de renta a largo plazo.',
+        tipologias: ['Edificio', 'Suelo residencial']
+      },
+      'rentabilidad-pasivo': {
+        name: 'Inversor de Rendimiento',
+        desc: 'Buscas maximizar la rentabilidad de tu capital con una gestión delegada. Te presentamos operaciones con recorrido de revalorización claro y reporting periódico.',
+        tipologias: ['Nave industrial', 'Edificio']
+      },
+      'preservar-activo': {
+        name: 'Co-inversor Estratégico',
+        desc: 'Querés preservar capital pero participar de cerca en las decisiones. Encajás bien en operaciones de co-inversión con seguimiento directo del equipo gestor.',
+        tipologias: ['Suelo residencial', 'Suelo a desarrollar']
+      },
+      'rentabilidad-activo': {
+        name: 'Inversor Oportunista',
+        desc: 'Buscas la máxima rentabilidad y quieres estar involucrado en cada etapa de la operación. Es el perfil ideal para desarrollos y operaciones de mayor complejidad.',
+        tipologias: ['Suelo a desarrollar', 'Nave industrial']
+      }
+    };
+
+    function goToStep(n){
+      steps.forEach(s => s.classList.toggle('active', s.dataset.pistep === String(n)));
+      progressFill.style.width = (n / total * 100) + '%';
+      progressLabel.textContent = 'Pregunta ' + n + ' de ' + total;
+    }
+
+    // Preguntas 1 y 2 (selección única, avanza solo)
+    quiz.querySelectorAll('.pi-q-options').forEach((group, idx) => {
+      const axis = group.dataset.axis;
+      group.querySelectorAll('.pi-q-option').forEach(opt => {
+        opt.addEventListener('click', () => {
+          group.querySelectorAll('.pi-q-option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          const val = parseInt(opt.dataset.val);
+          if (axis === 'x') xVal = val; else yVal = val;
+          setTimeout(() => goToStep(idx + 2), 350);
+        });
+      });
+    });
+
+    // Pregunta 3: rango (avanza al resultado)
+    const rangoBtns = quiz.querySelectorAll('#piRango .af-range-btn');
+    rangoBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        rangoBtns.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        rangoVal = btn.dataset.value;
+        setTimeout(showResult, 350);
+      });
+    });
+
+    function showResult(){
+      const xKey = xVal >= 50 ? 'rentabilidad' : 'preservar';
+      const yKey = yVal >= 50 ? 'activo' : 'pasivo';
+      const profile = profiles[xKey + '-' + yKey];
+      currentTipologias = profile.tipologias;
+
+      const px = 20 + (xVal/100)*200;
+      const py = 220 - (yVal/100)*200;
+      document.getElementById('piDot').setAttribute('cx', px);
+      document.getElementById('piDot').setAttribute('cy', py);
+
+      document.getElementById('piProfileName').textContent = profile.name;
+      document.getElementById('piProfileDesc').textContent = profile.desc;
+      document.getElementById('piTipologias').innerHTML = profile.tipologias.map(t => '<span class="pi-chip">'+t+'</span>').join('');
+
+      quiz.style.display = 'none';
+      document.getElementById('piResult').classList.add('active');
+    }
+
+    document.getElementById('piRestart').addEventListener('click', () => {
+      xVal = yVal = rangoVal = null;
+      quiz.querySelectorAll('.pi-q-option, .af-range-btn').forEach(el => el.classList.remove('selected'));
+      document.getElementById('piResult').classList.remove('active');
+      quiz.style.display = 'block';
+      goToStep(1);
+    });
+
+    // CTA: lleva al formulario de consulta y pre-completa según el perfil
+    document.getElementById('piCta').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('activos').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setTimeout(() => {
+        const tipologiaCards = document.querySelectorAll('#afTipologia .af-option-card');
+        tipologiaCards.forEach(card => {
+          if (currentTipologias.includes(card.dataset.value) && !card.classList.contains('selected')) {
+            card.click();
+          }
+        });
+        setTimeout(() => {
+          document.getElementById('afNext1').click();
+          if (rangoVal) {
+            const rangoBtn = document.querySelector('#afRango .af-range-btn[data-value="'+CSS.escape(rangoVal)+'"]');
+            if (rangoBtn) rangoBtn.click();
+          }
+        }, 300);
+      }, 500);
+    });
+  })();
+
   // Consulta cartera — wizard
   (function(){
     const form = document.getElementById('afForm');
@@ -869,7 +1201,9 @@
         const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
         const json = await res.json();
         if (json.success) {
+          const zonaVal = document.getElementById('afZonaInteres').value;
           document.getElementById('afSummary').innerHTML =
+            (zonaVal ? '<div><b>Zona:</b> ' + zonaVal + '</div>' : '') +
             '<div><b>Tipología:</b> ' + selectedTipologias.join(', ') + '</div>' +
             '<div><b>Rango:</b> ' + (selectedRango || '—') + '</div>' +
             '<div><b>Nombre:</b> ' + document.getElementById('afNombre').value + '</div>' +
