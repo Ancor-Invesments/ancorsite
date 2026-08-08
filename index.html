@@ -219,13 +219,27 @@
   .activo-card p{font-size:13px;opacity:.68;margin-bottom:16px;}
   .activo-link{font-size:12px;color:var(--gold-light);border-bottom:1px solid var(--gold);padding-bottom:2px;}
 
-  /* MAPA EIXAMPLE */
+  /* MAPA BARCELONA */
   #explora-mapa{position:relative;overflow:hidden;}
-  .em-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:36px;align-items:center;max-width:980px;margin:0 auto;}
-  .em-block{cursor:pointer;transition:fill .2s,stroke .2s;}
-  .em-block-label{font-size:9px;fill:rgba(233,230,222,0.55);pointer-events:none;transition:fill .2s;font-family:'Inter';}
+  .em-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:36px;align-items:center;max-width:1040px;margin:0 auto;}
+  .em-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .em-tile{
+    position:relative;aspect-ratio:1/1;cursor:pointer;
+    clip-path:polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%);
+    background-image:linear-gradient(180deg, rgba(13,27,42,0.15) 0%, rgba(13,27,42,0.9) 100%), url("assets/hero-poster.jpg");
+    background-size:340% 340%;
+    transition:transform .25s ease, filter .25s ease;
+    filter:saturate(0.85);
+  }
+  .em-tile:hover{transform:translateY(-3px) scale(1.03);filter:saturate(1.05);}
+  .em-tile.selected{filter:saturate(1.1) brightness(1.05);box-shadow:0 0 0 2px var(--gold) inset;}
+  .em-tile span{
+    position:absolute;left:0;right:0;bottom:14%;text-align:center;
+    font-size:10.5px;letter-spacing:.02em;color:var(--cream);padding:0 8px;line-height:1.25;
+    font-family:'Inter';font-weight:500;
+  }
   .em-panel{
-    border:1px solid var(--line);border-radius:6px;padding:26px 28px;min-height:200px;
+    border:1px solid var(--line);border-radius:6px;padding:26px 28px;min-height:220px;
     display:flex;flex-direction:column;justify-content:center;
   }
   .em-panel-empty{font-size:13.5px;opacity:.55;text-align:center;}
@@ -234,6 +248,7 @@
   .em-panel-desc{font-size:13.5px;opacity:.72;margin-bottom:20px;line-height:1.6;}
   @media(max-width:800px){
     .em-wrap{grid-template-columns:1fr;}
+    .em-grid{grid-template-columns:repeat(4,1fr);}
   }
 
   #perfil-inversor{position:relative;overflow:hidden;background:var(--navy-2);}
@@ -430,9 +445,15 @@
   .team-photo-card:hover{transform:translateY(-6px);border-color:var(--gold);}
   .team-photo-card img{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-    transition:transform .5s ease;
+    transition:transform .5s ease, opacity .4s ease;
   }
   .team-photo-card:hover img{transform:scale(1.05);}
+  .team-photo-card .team-video{
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity .4s ease;pointer-events:none;
+  }
+  .team-photo-card.playing .team-video{opacity:1;}
+  .team-photo-card.playing img{opacity:0;}
   .team-photo-card .photo-placeholder{
     position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
     font-family:'Cormorant Garamond',serif;font-size:64px;color:var(--gold);
@@ -650,18 +671,18 @@
 <section id="explora-mapa" style="background:var(--navy-2);">
   <div class="container">
     <div class="section-head reveal" style="text-align:center;margin:0 auto 40px;">
-      <span class="eyebrow">Cartera por zona</span>
-      <h2>Explora el <em>Eixample</em></h2>
-      <p style="margin-top:14px;opacity:.7;font-size:14.5px;max-width:520px;margin-left:auto;margin-right:auto;">Toca una manzana del barrio que te interese y te contamos qué estamos viendo ahí ahora mismo.</p>
+      <span class="eyebrow">Cartera por barrio</span>
+      <h2>Explora <em>Barcelona</em></h2>
+      <p style="margin-top:14px;opacity:.7;font-size:14.5px;max-width:520px;margin-left:auto;margin-right:auto;">Toca un barrio y te contamos qué lo hace interesante para invertir ahora mismo.</p>
     </div>
 
     <div class="em-wrap reveal">
-      <svg id="emGrid" viewBox="0 0 460 320" style="width:100%;height:auto;"></svg>
+      <div class="em-grid" id="emGrid"></div>
 
       <div class="em-panel" id="emPanel">
-        <div class="em-panel-empty" id="emEmpty">Toca una manzana en el mapa para ver la zona</div>
+        <div class="em-panel-empty" id="emEmpty">Toca un barrio para ver sus características</div>
         <div id="emContent" style="display:none;">
-          <div class="em-panel-zone" id="emZoneTag"></div>
+          <div class="em-panel-zone" id="emZoneTag">Barcelona</div>
           <div class="em-panel-title" id="emZoneTitle"></div>
           <div class="em-panel-desc" id="emZoneDesc"></div>
           <a href="#activos" class="btn btn-primary" id="emCta" style="font-size:12.5px;padding:11px 22px;">Consultar sobre esta zona →</a>
@@ -803,8 +824,9 @@
       <h2>Personas detrás de <em>cada operación</em></h2>
     </div>
     <div class="team-grid reveal">
-      <a class="team-photo-card" href="https://www.linkedin.com/in/greta-carabonela-694226b7" target="_blank" rel="noopener">
+      <a class="team-photo-card" href="https://www.linkedin.com/in/greta-carabonela-694226b7" target="_blank" rel="noopener" data-video="assets/team-greta.mp4">
         <img src="assets/team-greta.jpg" alt="Greta Carabonela">
+        <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-greta.mp4" type="video/mp4"></video>
         <div class="overlay"></div>
         <div class="info">
           <div class="role">CEO</div>
@@ -812,8 +834,9 @@
           <span class="li-link">LinkedIn →</span>
         </div>
       </a>
-      <a class="team-photo-card" href="https://www.linkedin.com/in/fernando-benitez-rojas" target="_blank" rel="noopener">
+      <a class="team-photo-card" href="https://www.linkedin.com/in/fernando-benitez-rojas" target="_blank" rel="noopener" data-video="assets/team-fernando.mp4">
         <img src="assets/team-fernando.jpg" alt="Fernando Benítez">
+        <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-fernando.mp4" type="video/mp4"></video>
         <div class="overlay"></div>
         <div class="info">
           <div class="role">Consultor inmobiliario</div>
@@ -822,8 +845,9 @@
         </div>
       </a>
       <!-- Ludivine Gautard -->
-      <a class="team-photo-card team-photo-card--center" href="https://www.linkedin.com/in/ludivine-gautard" target="_blank" rel="noopener">
+      <a class="team-photo-card team-photo-card--center" href="https://www.linkedin.com/in/ludivine-gautard" target="_blank" rel="noopener" data-video="assets/team-ludivine.mp4">
         <img src="assets/team-ludivine.jpg" alt="Ludivine Gautard">
+        <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-ludivine.mp4" type="video/mp4"></video>
         <div class="overlay"></div>
         <div class="info">
           <div class="role">Investment Consultant & Strategic Account Manager</div>
@@ -941,78 +965,62 @@
   }, { threshold: 0.3 });
   tlEls.forEach(el => tlIo.observe(el));
 
-  // Explora el Eixample — mapa interactivo
-  (function(){
-    const svg = document.getElementById('emGrid');
-    if (!svg) return;
+  // Equipo — vídeo al pasar el cursor
+  document.querySelectorAll('.team-photo-card[data-video]').forEach(card => {
+    const video = card.querySelector('.team-video');
+    if (!video) return;
+    let hasError = false;
+    video.addEventListener('error', () => { hasError = true; }, true);
+    card.addEventListener('mouseenter', () => {
+      if (hasError) return;
+      card.classList.add('playing');
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => {
+      card.classList.remove('playing');
+      video.pause();
+    });
+  });
 
-    // EDITA: descripciones ilustrativas — reemplaza por datos reales de tu cartera por zona
+  // Explora Barcelona — mapa interactivo de barrios
+  (function(){
+    const grid = document.getElementById('emGrid');
+    if (!grid) return;
+
+    // EDITA: descripciones ilustrativas — reemplaza por el ángulo real que quieras dar a cada barrio
     const zones = [
-      { name: 'Dreta de l\'Eixample', desc: 'La zona con mayor densidad comercial y de oficinas del distrito. Alta demanda de locales y edificios de renta.' },
-      { name: 'Sagrada Família', desc: 'Entorno turístico consolidado, fuerte tensión de precios. Ideal para activos de alto valor con recorrido de revalorización.' },
-      { name: 'Fort Pienc', desc: 'Zona en transformación, buena relación precio-potencial. Interesante para suelo a desarrollar.' },
-      { name: 'Antiga Esquerra', desc: 'Predominio residencial de alto standing, edificios de época bien conservados.' },
-      { name: 'Nova Esquerra', desc: 'Mezcla residencial y terciaria, buena conectividad. Activos con perfil de rentabilidad estable.' },
-      { name: 'Sant Antoni', desc: 'Barrio en plena revalorización, alta demanda de locales comerciales y naves de proximidad.' }
+      { name: 'Eixample', desc: 'La cuadrícula más reconocible de Europa. Máxima demanda residencial y comercial, con edificios modernistas de gran valor patrimonial.' },
+      { name: 'Gràcia', desc: 'Encanto de pueblo dentro de la ciudad, plazas con vida propia. Fuerte revalorización sostenida en la última década.' },
+      { name: 'Ciutat Vella', desc: 'Casco histórico con turismo consolidado todo el año. Rentabilidades altas en alquiler vacacional y de temporada.' },
+      { name: 'Sarrià-Sant Gervasi', desc: 'La zona residencial más exclusiva de Barcelona. Tranquilidad, colegios internacionales y alto poder adquisitivo.' },
+      { name: 'Poblenou', desc: 'Antiguo distrito industrial reconvertido en el hub tecnológico de la ciudad (22@). Naves con enorme potencial de transformación.' },
+      { name: 'Sant Antoni', desc: 'Uno de los barrios de mayor revalorización reciente. Mercado renovado, ambiente joven y muy buena conectividad.' },
+      { name: 'Les Corts', desc: 'Zona residencial estable junto al Camp Nou. Buena relación calidad-precio y demanda constante.' },
+      { name: 'Poble Sec', desc: 'Subida sostenida de precios, a los pies de Montjuïc. Excelente conexión con el centro y el puerto.' }
     ];
 
-    const cols = 3, rows = 2, size = 118, gap = 20;
-    const offX = (460 - (cols*size + (cols-1)*gap)) / 2;
-    const offY = (320 - (rows*(size-20) + (rows-1)*gap)) / 2;
-    let i = 0;
-    const svgNS = 'http://www.w3.org/2000/svg';
+    const positions = ['0% 0%','30% 10%','60% 0%','15% 40%','50% 45%','80% 20%','10% 75%','65% 70%'];
 
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        if (i >= zones.length) break;
-        const x = offX + c*(size+gap);
-        const y = offY + r*(size-20+gap);
-        const cx = x + size/2, cy = y + (size-20)/2, rad = size/2 - 6;
-        const pts = [];
-        for (let k = 0; k < 8; k++) {
-          const ang = Math.PI/8 + k*Math.PI/4;
-          pts.push((cx+rad*Math.sin(ang)).toFixed(1)+','+(cy-rad*0.72*Math.cos(ang)).toFixed(1));
-        }
-        const poly = document.createElementNS(svgNS, 'polygon');
-        poly.setAttribute('points', pts.join(' '));
-        poly.setAttribute('class', 'em-block');
-        poly.setAttribute('fill', 'var(--navy)');
-        poly.setAttribute('stroke', 'rgba(233,230,222,0.18)');
-        poly.setAttribute('stroke-width', '1');
+    zones.forEach((zone, i) => {
+      const tile = document.createElement('div');
+      tile.className = 'em-tile';
+      tile.style.backgroundPosition = positions[i % positions.length];
+      tile.innerHTML = '<span>' + zone.name + '</span>';
 
-        const label = document.createElementNS(svgNS, 'text');
-        label.setAttribute('x', cx);
-        label.setAttribute('y', cy + 4);
-        label.setAttribute('text-anchor', 'middle');
-        label.setAttribute('class', 'em-block-label');
-        label.textContent = zones[i].name;
+      tile.addEventListener('click', () => {
+        grid.querySelectorAll('.em-tile').forEach(t => t.classList.remove('selected'));
+        tile.classList.add('selected');
 
-        (function(zone, polyEl, labelEl){
-          polyEl.addEventListener('click', () => {
-            svg.querySelectorAll('.em-block').forEach(p => p.setAttribute('fill', 'var(--navy)'));
-            polyEl.setAttribute('fill', 'rgba(184,151,90,0.22)');
-            polyEl.setAttribute('stroke', '#b8975a');
+        document.getElementById('emEmpty').style.display = 'none';
+        document.getElementById('emContent').style.display = 'block';
+        document.getElementById('emZoneTitle').textContent = zone.name;
+        document.getElementById('emZoneDesc').textContent = zone.desc;
+        document.getElementById('afZonaInteres').value = zone.name;
+      });
 
-            document.getElementById('emEmpty').style.display = 'none';
-            document.getElementById('emContent').style.display = 'block';
-            document.getElementById('emZoneTag').textContent = 'Eixample · Barcelona';
-            document.getElementById('emZoneTitle').textContent = zone.name;
-            document.getElementById('emZoneDesc').textContent = zone.desc;
-            document.getElementById('afZonaInteres').value = zone.name;
-          });
-          polyEl.addEventListener('mouseenter', () => {
-            if (polyEl.getAttribute('stroke') !== '#b8975a') polyEl.setAttribute('stroke', 'rgba(184,151,90,0.6)');
-          });
-          polyEl.addEventListener('mouseleave', () => {
-            if (polyEl.getAttribute('stroke') !== '#b8975a') polyEl.setAttribute('stroke', 'rgba(233,230,222,0.18)');
-          });
-        })(zones[i], poly, label);
-
-        svg.appendChild(poly);
-        svg.appendChild(label);
-        i++;
-      }
-    }
+      grid.appendChild(tile);
+    });
 
     document.getElementById('emCta').addEventListener('click', (e) => {
       e.preventDefault();
