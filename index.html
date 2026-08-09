@@ -199,6 +199,16 @@
   .section-head h2{font-size:clamp(28px,3.4vw,44px);margin-top:14px;line-height:1.15;}
   .section-head h2 em{color:var(--gold-light);font-style:italic;}
 
+  .section-gold-grid{position:relative;background:#0d1b3e;overflow:hidden;}
+  .section-gold-grid::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background-image:
+      linear-gradient(rgba(184,137,42,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(184,137,42,0.06) 1px, transparent 1px);
+    background-size:60px 60px;
+  }
+  .section-gold-grid .container{position:relative;z-index:1;}
+
   .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
   .card{background:var(--navy);padding:38px 30px;}
   .card h3{font-family:'Inter';font-weight:500;font-size:15px;color:var(--gold-light);margin-bottom:12px;letter-spacing:.02em;}
@@ -569,7 +579,7 @@
   </div>
 </section>
 
-<section id="que-hacemos">
+<section id="que-hacemos" class="section-gold-grid">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Qué hacemos</span>
@@ -763,7 +773,7 @@
   </div>
 </section>
 
-<section id="por-que">
+<section id="por-que" class="section-gold-grid">
   <div class="container">
     <div class="section-head reveal">
       <span class="eyebrow">Nuestra trayectoria</span>
