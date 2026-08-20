@@ -573,10 +573,12 @@
     position:relative;height:0;
   }
   .oficina-label{
-    position:absolute;left:50%;bottom:48px;transform:translateX(-50%);
-    font-family:'Inter';font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-    color:var(--navy);opacity:.65;white-space:nowrap;z-index:1;
+    position:absolute;left:50%;bottom:44px;transform:translateX(-50%);
+    display:flex;align-items:center;gap:7px;
+    font-family:'Inter';font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--navy);opacity:.75;white-space:nowrap;z-index:1;
   }
+  .oficina-label svg{width:15px;height:15px;stroke:var(--gold);flex-shrink:0;}
   .oficina-btn{
     position:absolute;left:50%;top:0;transform:translate(-50%,-50%);
     width:58px;height:58px;border-radius:50%;
@@ -1050,7 +1052,7 @@
       <div class="team-item">
         <div class="team-photo-card" data-video="assets/team-greta.mp4">
           <img src="assets/team-greta.jpg" alt="Greta Carabonela">
-          <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-greta.mp4" type="video/mp4"></video>
+          <video class="team-video" muted loop playsinline preload="metadata"><source src="assets/team-greta.mp4" type="video/mp4"></video>
           <div class="overlay"></div>
           <div class="info">
             <div class="role">CEO</div>
@@ -1066,7 +1068,7 @@
       <div class="team-item">
         <div class="team-photo-card" data-video="assets/team-ludivine.mp4">
           <img src="assets/team-ludivine.jpg" alt="Ludivine Gautard">
-          <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-ludivine.mp4" type="video/mp4"></video>
+          <video class="team-video" muted loop playsinline preload="metadata"><source src="assets/team-ludivine.mp4" type="video/mp4"></video>
           <div class="overlay"></div>
           <div class="info">
             <div class="role">Investment Consultant & Strategic Account Manager</div>
@@ -1081,7 +1083,7 @@
       <div class="team-item team-item--center">
         <div class="team-photo-card" data-video="assets/team-fernando.mp4">
           <img src="assets/team-fernando.jpg" alt="Fernando Benítez">
-          <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-fernando.mp4" type="video/mp4"></video>
+          <video class="team-video" muted loop playsinline preload="metadata"><source src="assets/team-fernando.mp4" type="video/mp4"></video>
           <div class="overlay"></div>
           <div class="info">
             <div class="role">Consultor inmobiliario</div>
@@ -1099,7 +1101,10 @@
 
 <section class="oficina-strip">
   <div class="oficina-seam">
-    <span class="oficina-label">Oficina</span>
+    <span class="oficina-label">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 105 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+      Oficina Aribau
+    </span>
     <button class="oficina-btn" id="oficinaBtn" aria-expanded="false" aria-label="Ver oficina">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
     </button>
@@ -1314,8 +1319,16 @@
         entries.forEach(entry => {
           if (hasError) return;
           if (entry.isIntersecting) {
-            card.classList.add('playing');
-            video.play().catch(() => {});
+            const playPromise = video.play();
+            if (playPromise) {
+              playPromise.then(() => {
+                // Solo ocultamos la foto una vez confirmado que el vídeo arrancó
+                card.classList.add('playing');
+              }).catch(() => {
+                // Si el navegador bloquea el autoplay, la foto se queda visible
+                card.classList.remove('playing');
+              });
+            }
           } else {
             card.classList.remove('playing');
             video.pause();
