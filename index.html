@@ -331,6 +331,15 @@
   }
   .af-fields input:focus,.af-fields textarea:focus{outline:none;border-color:var(--gold);}
 
+  .consent-check{
+    display:flex;align-items:flex-start;gap:9px;font-size:12.5px;opacity:.75;line-height:1.5;
+    cursor:pointer;
+  }
+  .consent-check input{
+    margin-top:2px;width:15px;height:15px;flex-shrink:0;accent-color:var(--gold);cursor:pointer;
+  }
+  .consent-check a{color:var(--gold-light);text-decoration:underline;}
+
   .af-nav{display:flex;justify-content:space-between;align-items:center;margin-top:32px;}
   .af-back{font-size:13px;opacity:.6;cursor:pointer;transition:opacity .2s;}
   .af-back:hover{opacity:1;}
@@ -805,6 +814,10 @@
             <input type="email" name="email" id="afEmail" placeholder="Email" required>
             <input type="tel" name="telefono" placeholder="Teléfono (opcional)">
             <textarea name="comentario" rows="3" placeholder="Comentario adicional (opcional)"></textarea>
+            <label class="consent-check">
+              <input type="checkbox" id="afConsent" required>
+              He leído y acepto la <a href="privacidad.html" target="_blank">política de privacidad</a> y consiento el tratamiento de mis datos para recibir información sobre esta consulta.
+            </label>
           </div>
           <div class="af-nav">
             <span class="af-back" data-back="2">← Paso anterior</span>
@@ -934,6 +947,10 @@
         <option>Otro</option>
       </select>
       <textarea name="mensaje" placeholder="Mensaje"></textarea>
+      <label class="consent-check">
+        <input type="checkbox" id="contactConsent" required>
+        He leído y acepto la <a href="privacidad.html" target="_blank">política de privacidad</a> y consiento el tratamiento de mis datos para responder a mi consulta.
+      </label>
       <button type="submit" class="btn btn-primary">Enviar consulta</button>
       <span class="form-msg" id="formMsg">Mensaje recibido. Nos pondremos en contacto en 24–48 h.</span>
     </form>
