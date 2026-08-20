@@ -469,17 +469,18 @@
   }
   #equipo .team-grid{position:relative;z-index:1;}
   .team-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:460px;margin:0 auto;}
+  .team-item{display:flex;flex-direction:column;gap:12px;}
   .team-photo-card{
     position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;
     background:var(--navy-2);border:1px solid var(--line);
     transition:transform .35s ease, border-color .35s ease;
   }
-  .team-photo-card:hover{transform:translateY(-6px);border-color:var(--gold);}
+  .team-item:hover .team-photo-card{transform:translateY(-6px);border-color:var(--gold);}
   .team-photo-card img{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
     transition:transform .5s ease, opacity .4s ease;
   }
-  .team-photo-card:hover img{transform:scale(1.05);}
+  .team-item:hover .team-photo-card img{transform:scale(1.05);}
   .team-photo-card .team-video{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
     opacity:0;transition:opacity .4s ease;pointer-events:none;
@@ -499,19 +500,20 @@
     position:absolute;left:0;right:0;bottom:0;padding:22px;z-index:2;
   }
   .team-photo-card .role{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);margin-bottom:4px;}
-  .team-photo-card h3{font-size:22px;margin-bottom:10px;color:var(--cream);}
-  .team-photo-card .li-link{
-    display:inline-flex;align-items:center;gap:6px;
-    font-size:12px;color:var(--ink);opacity:.85;
-    border:1px solid var(--line);border-radius:20px;padding:6px 12px;
-    transition:border-color .2s, color .2s;
+  .team-photo-card h3{font-size:22px;margin-bottom:0;color:var(--cream);}
+  .team-li-btn{
+    display:flex;align-items:center;justify-content:center;gap:7px;
+    font-size:12.5px;color:var(--ink);
+    border:1px solid var(--line);border-radius:20px;padding:9px 14px;
+    transition:border-color .2s, color .2s, background .2s;
   }
-  .team-photo-card .li-link:hover{border-color:var(--gold);color:var(--gold-light);}
-  .team-photo-card--center{grid-column:1/-1;width:calc(50% - 10px);margin:0 auto;}
+  .team-li-btn svg{width:14px;height:14px;stroke:currentColor;flex-shrink:0;}
+  .team-li-btn:hover{border-color:var(--gold);color:var(--gold-light);background:rgba(181,140,73,0.08);}
+  .team-item--center{grid-column:1/-1;width:calc(50% - 10px);margin:0 auto;}
 
   @media(min-width:641px){
     .team-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));max-width:1000px;}
-    .team-photo-card--center{grid-column:auto;width:auto;margin:0;}
+    .team-item--center{grid-column:auto;width:auto;margin:0;}
   }
   @media(max-width:560px){
     .team-photo-card .info{padding:14px;}
@@ -858,37 +860,52 @@
       <h2>Personas detrás de <em>cada operación</em></h2>
     </div>
     <div class="team-grid reveal">
-      <a class="team-photo-card" href="https://www.linkedin.com/in/greta-carabonela-694226b7" target="_blank" rel="noopener" data-video="assets/team-greta.mp4">
-        <img src="assets/team-greta.jpg" alt="Greta Carabonela">
-        <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-greta.mp4" type="video/mp4"></video>
-        <div class="overlay"></div>
-        <div class="info">
-          <div class="role">CEO</div>
-          <h3>Greta Carabonela</h3>
-          <span class="li-link">LinkedIn →</span>
+      <div class="team-item">
+        <div class="team-photo-card" data-video="assets/team-greta.mp4">
+          <img src="assets/team-greta.jpg" alt="Greta Carabonela">
+          <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-greta.mp4" type="video/mp4"></video>
+          <div class="overlay"></div>
+          <div class="info">
+            <div class="role">CEO</div>
+            <h3>Greta Carabonela</h3>
+          </div>
         </div>
-      </a>
+        <a class="team-li-btn" href="https://www.linkedin.com/in/greta-carabonela-694226b7" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M8 10v6M8 7.5v.01M12 16v-4c0-1.5 1-2 2-2s2 .5 2 2v4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          LinkedIn
+        </a>
+      </div>
       <!-- Ludivine Gautard -->
-      <a class="team-photo-card" href="https://www.linkedin.com/in/ludivine-gautard" target="_blank" rel="noopener" data-video="assets/team-ludivine.mp4">
-        <img src="assets/team-ludivine.jpg" alt="Ludivine Gautard">
-        <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-ludivine.mp4" type="video/mp4"></video>
-        <div class="overlay"></div>
-        <div class="info">
-          <div class="role">Investment Consultant & Strategic Account Manager</div>
-          <h3>Ludivine Gautard</h3>
-          <span class="li-link">LinkedIn →</span>
+      <div class="team-item">
+        <div class="team-photo-card" data-video="assets/team-ludivine.mp4">
+          <img src="assets/team-ludivine.jpg" alt="Ludivine Gautard">
+          <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-ludivine.mp4" type="video/mp4"></video>
+          <div class="overlay"></div>
+          <div class="info">
+            <div class="role">Investment Consultant & Strategic Account Manager</div>
+            <h3>Ludivine Gautard</h3>
+          </div>
         </div>
-      </a>
-      <a class="team-photo-card team-photo-card--center" href="https://www.linkedin.com/in/fernando-benitez-rojas" target="_blank" rel="noopener" data-video="assets/team-fernando.mp4">
-        <img src="assets/team-fernando.jpg" alt="Fernando Benítez">
-        <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-fernando.mp4" type="video/mp4"></video>
-        <div class="overlay"></div>
-        <div class="info">
-          <div class="role">Consultor inmobiliario</div>
-          <h3>Fernando Benítez</h3>
-          <span class="li-link">LinkedIn →</span>
+        <a class="team-li-btn" href="https://www.linkedin.com/in/ludivine-gautard" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M8 10v6M8 7.5v.01M12 16v-4c0-1.5 1-2 2-2s2 .5 2 2v4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          LinkedIn
+        </a>
+      </div>
+      <div class="team-item team-item--center">
+        <div class="team-photo-card" data-video="assets/team-fernando.mp4">
+          <img src="assets/team-fernando.jpg" alt="Fernando Benítez">
+          <video class="team-video" muted loop playsinline preload="none"><source src="assets/team-fernando.mp4" type="video/mp4"></video>
+          <div class="overlay"></div>
+          <div class="info">
+            <div class="role">Consultor inmobiliario</div>
+            <h3>Fernando Benítez</h3>
+          </div>
         </div>
-      </a>
+        <a class="team-li-btn" href="https://www.linkedin.com/in/fernando-benitez-rojas" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 4h16v16H4z" stroke-linejoin="round"/><path d="M8 10v6M8 7.5v.01M12 16v-4c0-1.5 1-2 2-2s2 .5 2 2v4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          LinkedIn
+        </a>
+      </div>
     </div>
   </div>
 </section>
