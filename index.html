@@ -237,6 +237,13 @@
   }
   .section-gold-grid .container{position:relative;z-index:1;}
 
+  #que-hacemos::after{
+    content:"";position:absolute;inset:-20px;z-index:-1;
+    background-image:linear-gradient(rgba(16,19,63,0.78),rgba(16,19,63,0.82)), url("assets/que-hacemos-bg.jpg");
+    background-size:cover;background-position:center 30%;
+    filter:blur(7px);
+  }
+
   .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
   .card{background:var(--navy);padding:38px 30px;}
   .card h3{font-family:'Inter';font-weight:500;font-size:15px;color:var(--gold-light);margin-bottom:12px;letter-spacing:.02em;}
