@@ -120,7 +120,7 @@
   header.scrolled{background:rgba(16,19,63,0.92);backdrop-filter:blur(10px);padding:14px 0;border-color:var(--line);}
   nav{display:flex;justify-content:space-between;align-items:center;}
   .logo{display:flex;align-items:center;}
-  .logo img.logo-full{height:32px;width:auto;display:block;}
+  .logo img.logo-full{height:42px;width:auto;display:block;}
   .nav-links{display:flex;gap:36px;font-size:13px;letter-spacing:.03em;}
   .nav-links a{opacity:.82;transition:opacity .2s;}
   .nav-links a:hover{opacity:1;color:var(--gold-light);}
@@ -133,12 +133,14 @@
   .burger{display:none;background:none;border:none;color:var(--ink);font-size:24px;cursor:pointer;z-index:110;position:relative;}
 
   @media(min-width:901px){
-    .logo img.logo-full{height:48px;}
+    .logo img.logo-full{height:62px;}
     .nav-links{gap:44px;font-size:16px;}
     .nav-cta{padding:13px 28px;font-size:14px;}
+    header{padding:24px 0;}
+    header.scrolled{padding:15px 0;}
   }
   @media(min-width:1400px){
-    .logo img.logo-full{height:58px;}
+    .logo img.logo-full{height:75px;}
     .nav-links{gap:50px;font-size:18px;}
     .nav-cta{padding:15px 32px;font-size:15px;}
     header{padding:26px 0;}
@@ -249,6 +251,20 @@
   .card{background:var(--navy);padding:38px 30px;}
   .card h3{font-family:'Inter';font-weight:500;font-size:15px;color:var(--gold-light);margin-bottom:12px;letter-spacing:.02em;}
   .card p{font-size:14px;opacity:.72;}
+
+  .section-head p.section-intro{margin-top:16px;font-size:15px;opacity:.75;max-width:640px;line-height:1.7;}
+
+  .differentiator{
+    display:flex;align-items:flex-start;gap:20px;margin-top:36px;
+    border:1px solid rgba(184,151,90,0.3);border-radius:6px;padding:26px 28px;
+    background:rgba(181,140,73,0.06);
+  }
+  .differentiator svg{width:34px;height:34px;stroke:var(--gold-light);flex-shrink:0;margin-top:2px;}
+  .differentiator p{font-size:14.5px;opacity:.85;line-height:1.7;}
+  .differentiator strong{color:var(--gold-light);font-weight:500;}
+
+  .services-head{margin-top:56px;margin-bottom:8px;text-align:center;}
+  .services-head span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);}
 
   .type-icons{display:flex;justify-content:space-between;flex-wrap:wrap;gap:28px;margin-top:44px;}
   .type-icon{display:flex;flex-direction:column;align-items:center;gap:12px;flex:1;min-width:90px;}
@@ -625,7 +641,7 @@
 
   footer{border-top:1px solid var(--line);padding:44px 0 40px;}
   .footer-logo{display:flex;align-items:center;justify-content:center;margin-bottom:24px;}
-  .footer-logo img.logo-full{height:30px;width:auto;display:block;}
+  .footer-logo img.logo-full{height:45px;width:auto;display:block;}
   .footer-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;opacity:.6;flex-wrap:wrap;gap:12px;}
 
   @media(max-width:900px){
@@ -678,7 +694,7 @@
   <div class="hero-fallback" aria-hidden="true"></div>
 
   <div class="container hero-content">
-    <span class="eyebrow">Inversión Inmobiliaria · Barcelona</span>
+    <span class="eyebrow">Asesoría Inmobiliaria · Barcelona</span>
     <h1>Inversiones que <em>construyen historias</em> de éxito.</h1>
     <div class="hero-cta">
       <a href="#contacto" class="btn btn-primary">Hablar con un asesor</a>
@@ -698,12 +714,76 @@
     <div class="section-head reveal">
       <span class="eyebrow">Qué hacemos</span>
       <h2>Capital inteligente aplicado al <em>mercado inmobiliario</em></h2>
+      <p class="section-intro">Analizamos cada operación en profundidad para identificar dónde está el mejor capital aplicado: la estructura, el momento y el tipo de activo que maximizan el retorno con el riesgo controlado, ya sea para un inversor patrimonial o para quien busca entrar en el mercado por primera vez.</p>
     </div>
     <div class="grid-4 reveal">
       <div class="card"><h3>Activos residenciales</h3><p>Proyectos residenciales prime en mercados con alta demanda y liquidez contrastada.</p></div>
       <div class="card"><h3>Activos terciarios</h3><p>Oficinas, locales y activos comerciales con contratos de renta a largo plazo.</p></div>
       <div class="card"><h3>Gestión patrimonial</h3><p>Estructuración y optimización de carteras inmobiliarias para family offices.</p></div>
       <div class="card"><h3>Inversión co-participada</h3><p>Acceso a operaciones de ticket elevado mediante co-inversión con otros inversores selectivos.</p></div>
+    </div>
+
+    <div class="differentiator reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+      <p><strong>No somos solo una inmobiliaria — somos una asesoría inmobiliaria.</strong> Acompañamos a cliente e inversor durante todo el proceso documental de la operación, sea cual sea su naturaleza: compraventa, traspaso, alquiler o inversión. Desde la due diligence inicial hasta la firma, nos ocupamos de que cada paso esté cubierto.</p>
+    </div>
+
+    <div class="services-head reveal">
+      <span class="eyebrow">Nuestros servicios</span>
+    </div>
+    <div class="type-icons reveal">
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <span>Búsqueda de activos off-market</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+        <span>Valoración y viabilidad</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9l4-3 4 3v10"/><path d="M12 19V6l4-3 4 3v13"/><path d="M2 19h20"/></svg>
+        <span>Estudio de mercado</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M8 21h8"/><path d="M12 17v4"/><circle cx="8" cy="10" r="1"/><circle cx="12" cy="10" r="1"/><circle cx="16" cy="10" r="1"/></svg>
+        <span>Publicación en portales inmobiliarios</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-7-7 18-3-8-8-3z"/></svg>
+        <span>Marketing y publicidad — Meta, LinkedIn, Google</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12h8"/><path d="M4 7l4 5-4 5"/><path d="M20 7l-4 5 4 5"/></svg>
+        <span>Negociación</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="M10 13h4M10 16h4"/></svg>
+        <span>Gestión documental</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M8 9V6a4 4 0 018 0v3"/><circle cx="12" cy="14" r="1.5"/></svg>
+        <span>Coordinación notarial y registral</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M17 6H9.5a2.5 2.5 0 000 5H14a2.5 2.5 0 010 5H6"/></svg>
+        <span>Estructuración fiscal</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13"/><path d="M13 4l4 4-4 4"/><path d="M20 16H7"/><path d="M11 12l-4 4 4 4"/></svg>
+        <span>Traspasos y licencias</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M3 10h18"/><circle cx="7.5" cy="14" r="1"/></svg>
+        <span>Búsqueda de financiación</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V9l7-5 7 5v12"/><path d="M9 21v-6h6v6"/></svg>
+        <span>Gestión de arrendamientos</span>
+      </div>
+      <div class="type-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M16 9l2 2 3.5-3.5"/></svg>
+        <span>Selección de inquilinos</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1214,16 +1294,36 @@
     if (!video) return;
     let hasError = false;
     video.addEventListener('error', () => { hasError = true; }, true);
-    card.addEventListener('mouseenter', () => {
-      if (hasError) return;
-      card.classList.add('playing');
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    });
-    card.addEventListener('mouseleave', () => {
-      card.classList.remove('playing');
-      video.pause();
-    });
+
+    const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (supportsHover) {
+      card.addEventListener('mouseenter', () => {
+        if (hasError) return;
+        card.classList.add('playing');
+        video.currentTime = 0;
+        video.play().catch(() => {});
+      });
+      card.addEventListener('mouseleave', () => {
+        card.classList.remove('playing');
+        video.pause();
+      });
+    } else {
+      // Móvil / táctil: sin hover posible, reproducir en loop cuando la tarjeta esté visible
+      const mobileIo = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (hasError) return;
+          if (entry.isIntersecting) {
+            card.classList.add('playing');
+            video.play().catch(() => {});
+          } else {
+            card.classList.remove('playing');
+            video.pause();
+          }
+        });
+      }, { threshold: 0.5 });
+      mobileIo.observe(card);
+    }
   });
 
   // Oficina — panel colapsable + carrusel automático
